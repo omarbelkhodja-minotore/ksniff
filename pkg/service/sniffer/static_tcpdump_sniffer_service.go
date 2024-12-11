@@ -43,7 +43,7 @@ func (u *StaticTcpdumpSnifferService) Start(stdOut io.Writer) error {
 	log.Info("start sniffing on remote container")
 
 	command := []string{u.settings.UserSpecifiedRemoteTcpdumpPath, "-i", u.settings.UserSpecifiedInterface,
-		"-U", "-w", "-", u.settings.UserSpecifiedFilter}
+		"-U", "-w", "-", u.settings.UserSpecifiedFilter, "s", "0", "B" , "4096"}
 
 	exitCode, err := u.kubernetesApiService.ExecuteCommand(u.settings.UserSpecifiedPodName, u.settings.UserSpecifiedContainer, command, stdOut)
 	if err != nil || exitCode != 0 {
